@@ -12,19 +12,19 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
     - setuptools
     - setuptools_scm
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - rdkit
     - matplotlib
     - numpy
@@ -36,6 +36,7 @@ test:
     - resultsanalysis
   requires:
     - pytest
+    - python {{ python_min }}
   commands:
     - pytest --pyargs resultsanalysis
 
